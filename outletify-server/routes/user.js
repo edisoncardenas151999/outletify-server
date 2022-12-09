@@ -19,7 +19,7 @@ router.get("/user/:userId", isAuthenticated, (req, res, next) => {
 router.post("/cart/:userId", (req, res) => {
   const userId = req.params;
 
-  User.ffindOneAndUpdate(userId, { $set: { cart: [] } })
+  User.findOneAndUpdate(userId, { $set: { cart: [] } })
     .then(() => {
       console.log("deleted cart");
     })
