@@ -23,6 +23,12 @@ app.use("/auth", categoryRouter);
 const userRouter = require("./routes/user");
 app.use("/auth", userRouter);
 
+const sellRouter = require("./routes/sell");
+app.use("/auth", sellRouter);
+
+const paymentRouter = require("./routes/payment");
+app.use("/auth", paymentRouter);
+
 require("./error-handling")(app);
 
 module.exports = app;
