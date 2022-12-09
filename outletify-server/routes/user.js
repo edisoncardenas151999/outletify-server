@@ -16,11 +16,14 @@ router.get("/user/:userId", isAuthenticated, (req, res, next) => {
     .catch((error) => res.json(error));
 });
 
-router.post("/cart/:userId", isAuthenticated, (req, res) => {
-  console.log("delete cart");
-  const userId = req.payload._id;
-  Item.update({ _id: userId }, { $set: { cart: [] } })
-    .then((updatedId) => res.json(updatedId))
+router.post("/cart/:userId", (req, res) => {
+  const userId = req.params;
+
+  User.ffindOneAndUpdate(userId, { $set: { cart: [] } })
+    .then(() => {
+      console.log("deleted cart");
+    })
+    .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
 
