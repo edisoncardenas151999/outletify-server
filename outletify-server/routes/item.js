@@ -25,7 +25,6 @@ router.get("/items/:itemId", (req, res, next) => {
 router.post("/order/:id", isAuthenticated, (req, res) => {
   const { id } = req.params;
   const userId = req.payload._id;
-  console.log(userId);
   User.findByIdAndUpdate(userId, { $push: { cart: id } })
     .then((updatedId) => res.json(updatedId))
     .catch((err) => res.json(err));

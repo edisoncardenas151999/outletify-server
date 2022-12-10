@@ -24,7 +24,7 @@ router.post("/sell/:userId", (req, res, next) => {
 router.get("/inventory/:userId", (req, res, next) => {
   const { userId } = req.params;
   User.findById(userId)
-    .populate("inventory")
+    .populate("cart")
     .then((response) => res.json(response));
 });
 
