@@ -25,10 +25,34 @@ router.get("/items/:itemId", (req, res, next) => {
 router.post("/order/:id", isAuthenticated, (req, res) => {
   const { id } = req.params;
   const userId = req.payload._id;
-  console.log(userId);
   User.findByIdAndUpdate(userId, { $push: { cart: id } })
     .then((updatedId) => res.json(updatedId))
     .catch((err) => res.json(err));
 });
 
+router.put("/item/:itemId/edit", (req, res, next) => {
+  const { itemId } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(itemId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+  Item.findByIdAndUpdate(itemId, req.body, { new: true })
+    .then((updatedItem) => res.json(updatedItem))
+    .catch((error) => res.json(error));
+});
+router.delete("/item/:itemId/delete", (req, res, next) => {
+  const { itemId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(itemId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+  Item.findByIdAndRemove(itemId)
+    .then(() =>
+      res.json({
+        message: `Project with ${itemId} is removed successfully.`,
+      })
+    )
+    .catch((error) => res.json(error));
+});
 module.exports = router;

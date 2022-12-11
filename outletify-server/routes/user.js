@@ -18,13 +18,16 @@ router.get("/user/:userId", isAuthenticated, (req, res, next) => {
 
 router.post("/cart/:userId", (req, res) => {
   const userId = req.params;
-
   User.findOneAndUpdate(userId, { $set: { cart: [] } })
-    .then(() => {
-      console.log("deleted cart");
-    })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
+});
+
+router.get("/user", isAuthenticated, (req, res, next) => {
+  const userId = req.payload._id;
+  User.findById(userId)
+    .then((user) => res.status(200).json(user))
+    .catch((error) => res.json(error));
 });
 
 module.exports = router;
