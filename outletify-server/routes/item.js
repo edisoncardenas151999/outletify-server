@@ -30,6 +30,17 @@ router.post("/order/:id", isAuthenticated, (req, res) => {
     .catch((err) => res.json(err));
 });
 
+router.get("/item/:itemId/edit", (req, res, next) => {
+  const { itemId } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(itemId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+  Item.findById(itemId)
+    .then((item) => res.status(200).json(item))
+    .catch((error) => res.json(error));
+});
+
 router.put("/item/:itemId/edit", (req, res, next) => {
   const { itemId } = req.params;
   if (!mongoose.Types.ObjectId.isValid(itemId)) {
@@ -40,9 +51,9 @@ router.put("/item/:itemId/edit", (req, res, next) => {
     .then((updatedItem) => res.json(updatedItem))
     .catch((error) => res.json(error));
 });
+
 router.delete("/item/:itemId/delete", (req, res, next) => {
   const { itemId } = req.params;
-
   if (!mongoose.Types.ObjectId.isValid(itemId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;

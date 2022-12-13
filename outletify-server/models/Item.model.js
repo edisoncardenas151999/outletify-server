@@ -6,7 +6,6 @@ const itemSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      trim: true,
     },
     description: {
       type: String,
@@ -19,7 +18,6 @@ const itemSchema = new mongoose.Schema(
     },
     img: { type: String },
     user: { type: Schema.Types.ObjectId, ref: "User" },
-    brand: String,
   },
   {
     timestamps: true,
