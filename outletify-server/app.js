@@ -17,9 +17,6 @@ app.use("/auth", authRouter);
 const itemRouter = require("./routes/item");
 app.use("/auth", itemRouter);
 
-const categoryRouter = require("./routes/category");
-app.use("/auth", categoryRouter);
-
 const userRouter = require("./routes/user");
 app.use("/auth", userRouter);
 

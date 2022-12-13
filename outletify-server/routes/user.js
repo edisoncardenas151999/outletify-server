@@ -34,6 +34,13 @@ router.post("/cart/:userId", (req, res) => {
     .catch((err) => res.json(err));
 });
 
+router.post("/cart/:itemId", (req, res) => {
+  const itemId = req.params;
+  User.deleteOne({ cart: itemId })
+    .then((response) => res.json(response))
+    .catch((err) => res.json(err));
+});
+
 router.get("/user", isAuthenticated, (req, res, next) => {
   const userId = req.payload._id;
   User.findById(userId)
