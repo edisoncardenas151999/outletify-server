@@ -12,7 +12,7 @@ router.post("/sell/:userId", (req, res, next) => {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
-  Item.create({ name, description, price, img, category })
+  Item.create({ name, description, price, category })
     .then((newItem) => {
       return User.findByIdAndUpdate(userId, {
         $push: { inventory: newItem._id },
