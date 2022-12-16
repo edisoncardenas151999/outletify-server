@@ -57,6 +57,13 @@ router.get("/buyerItems", isAuthenticated, (req, res, next) => {
     .then((response) => res.json(response));
 });
 
+router.get("/item/:itemId", (req, res, next) => {
+  const { itemId } = req.params;
+  User.find({ PurchasesList: { $in: [itemId] } })
+    .then((user) => res.status(200).json(user))
+    .catch((error) => res.json(error));
+});
+
 router.get("/user", (req, res, next) => {
   const userId = req.params;
   User.findById(userId)
