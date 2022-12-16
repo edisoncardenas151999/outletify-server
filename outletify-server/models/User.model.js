@@ -6,8 +6,9 @@ const userSchema = new Schema(
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     name: { type: String, required: true },
-    inventory: [{ type: Schema.Types.ObjectId, ref: "Item" }],
     cart: [{ type: Schema.Types.ObjectId, ref: "Item" }],
+    inventory: [{ type: Schema.Types.ObjectId, ref: "Item" }],
+    PurchasesList: [{ type: Schema.Types.ObjectId, ref: "Item" }],
   },
   {
     timestamps: true,
