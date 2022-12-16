@@ -50,6 +50,13 @@ router.delete("/cart/:itemId", isAuthenticated, (req, res) => {
     .catch((err) => res.json(err));
 });
 
+router.get("/buyerItems", isAuthenticated, (req, res, next) => {
+  const userId = req.payload._id;
+  User.findById(userId)
+    .populate("PurchasesList")
+    .then((response) => res.json(response));
+});
+
 router.get("/user", (req, res, next) => {
   const userId = req.params;
   User.findById(userId)
