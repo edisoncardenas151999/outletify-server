@@ -26,6 +26,9 @@ app.use("/auth", sellRouter);
 const paymentRouter = require("./routes/payment");
 app.use("/auth", paymentRouter);
 
+const ratingtRouter = require("./routes/rating");
+app.use("/auth", ratingtRouter);
+
 require("./error-handling")(app);
 
 module.exports = app;
