@@ -18,6 +18,7 @@ const itemSchema = new mongoose.Schema(
     },
     img: { type: String },
     buyer: { type: Schema.Types.ObjectId, ref: "User" },
+    rating: { type: Schema.Types.ObjectId, ref: "Rating" },
   },
   {
     timestamps: true,

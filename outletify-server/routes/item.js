@@ -18,6 +18,7 @@ router.get("/items/:itemId", (req, res, next) => {
     return;
   }
   Item.findById(itemId)
+    .populate("rating")
     .then((project) => res.status(200).json(project))
     .catch((error) => res.json(error));
 });
